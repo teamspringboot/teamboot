@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="jquery.md5.js" type="text/javascript"></script>
+<script>
+$(function(){
+	$("#cmd_id").click(function(){
+		$.ajax({
+			url:"/cmd",
+			type:"GET",
+			success:function(info){
+				
+			}
+		});
+	});
+	$("#zhuce").click(function(){
+		var pwd=$.md5($("#password").val());
+		$("#password").val(pwd);
+		$.ajax({
+			url:"/users",
+			type:"POST",
+			dataType:"json",
+			data:$("#zhuceform").serialize(),
+			success:function(info){
+				
+			}
+		});
+	});
+	$("#denglu").click(function(){
+		var pwd=$.md5($("#userPwd2").val());
+		$("#userPwd").val(pwd);
+	});
+});
+</script>
+</head>
+<body>
+<button id="cmd_id">点我有意外惊喜哦</button>
+<form action="/loginPost" method="POST" id="dengluform">
+        用户名：<input type="text" name="userName"/>
+        <br/>
+        <input type="hidden" name="userPwd" id="userPwd"/>
+          密码： <input type="password" id="userPwd2"/>
+        <br/>
+        <input type="submit" id="denglu" value="登录"/>
+    </form>
+      
+    <form id="zhuceform" action="">
+        用户名：<input type="text" name="username"/>
+        <br/>
+        密码： <input type="password" id="password" name="password"/>
+        <br/>
+    </form>
+        <input type="button" id="zhuce" value="注册"/>
+</body>
+</html>

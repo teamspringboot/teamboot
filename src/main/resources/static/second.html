@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+<script>
+$(function(){
+	$.ajax({
+		url:'http://47.92.55.69:8080/LockerAPI/LockerAction?action=open&lockerId=18040022&boxno=002',
+		type:"GET",
+		dataType:"xml",
+		success:function(info){
+			console.log(info);
+		}
+	});
+})
+</script>
+</head>
+<body>
+这是第二个页面
+</body>
+</html>

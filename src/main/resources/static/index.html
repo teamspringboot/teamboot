@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function aa() {
+		var slabTime="20130909000000";
+		var year = slabTime.substring(0,4);
+		var month = slabTime.substring(4,6);
+		var day = slabTime.substring(6,8);
+		var hour = slabTime.substring(8,10);
+		var minute = slabTime.substring(10,12);
+		var second = slabTime.substring(12,14);
+		slabTime=year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
+		var time = new Date(slabTime);
+		console.log(time);
+		return time;
+	}
+</script>
+</head>
+<body>
+	<button onclick="aa()">aa</button>
+</body>
+</html>

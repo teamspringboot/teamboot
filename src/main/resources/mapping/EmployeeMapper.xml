@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.advert.mapper.EmployeeMapper" >
+	<resultMap id="BaseResultMap" type="com.advert.entity.Employee" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="classes" property="classes" jdbcType="VARCHAR" />
+		<result column="office" property="office" jdbcType="VARCHAR" />
+		<result column="salary" property="salary" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+    id, classes, office, salary
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+		<include refid="Base_Column_List" />
+    from employee
+    where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from employee
+    where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.advert.entity.Employee" >
+    insert into employee (id, classes, office, 
+      salary)
+    values (#{id,jdbcType=INTEGER}, #{classes,jdbcType=VARCHAR}, #{office,jdbcType=VARCHAR}, 
+      #{salary,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.advert.entity.Employee" >
+    insert into employee
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+        id,
+			</if>
+			<if test="classes != null" >
+        classes,
+			</if>
+			<if test="office != null" >
+        office,
+			</if>
+			<if test="salary != null" >
+        salary,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+        #{id,jdbcType=INTEGER},
+			</if>
+			<if test="classes != null" >
+        #{classes,jdbcType=VARCHAR},
+			</if>
+			<if test="office != null" >
+        #{office,jdbcType=VARCHAR},
+			</if>
+			<if test="salary != null" >
+        #{salary,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.advert.entity.Employee" >
+    update employee
+		<set >
+			<if test="classes != null" >
+        classes = #{classes,jdbcType=VARCHAR},
+			</if>
+			<if test="office != null" >
+        office = #{office,jdbcType=VARCHAR},
+			</if>
+			<if test="salary != null" >
+        salary = #{salary,jdbcType=DECIMAL},
+			</if>
+		</set>
+    where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.advert.entity.Employee" >
+    update employee
+    set classes = #{classes,jdbcType=VARCHAR},
+      office = #{office,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="find" parameterType="java.util.Map"  resultMap="BaseResultMap">
+	select  *	from employee
+		<trim prefix="WHERE" prefixOverrides="AND |OR " >
+			<if test="id !=null">
+	 		AND id= #{id}
+			</if>
+			<if test="classes != null">
+	 		AND classes=#{classes}
+			</if>
+			<if test="classesLike != null">
+	 		AND classes like CONCAT('%',#{classesLike},'%')
+			</if>
+			<if test="office != null">
+	 		AND office=#{office}
+			</if>
+			<if test="salary != null">
+	 		AND salary=#{salary}
+			</if>
+		</trim>
+	</select>
+</mapper>
